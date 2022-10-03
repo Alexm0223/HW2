@@ -27,7 +27,7 @@ public class FifteenPuzzle extends AppCompatActivity {
     public void newGame() {
         game = new GameBoard();
         printBoard();
-        //set clickable so that in the end of the game it will become unclickable
+        //set clickable so that at the end of the game it will become unclickable
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels.length; j++) {
                 labels[i][j].setClickable(true);
@@ -64,7 +64,7 @@ public class FifteenPuzzle extends AppCompatActivity {
         newGame = (Button)findViewById(R.id.button);
         moves = (TextView)findViewById(R.id.moves);
 
-        //=========== initialize the labels array ============
+        //initialize the labels array
 
         labels[0][0]=(TextView) findViewById(R.id.textView2);
         labels[0][1]=(TextView) findViewById(R.id.textView3);
@@ -83,7 +83,7 @@ public class FifteenPuzzle extends AppCompatActivity {
         labels[3][2]=(TextView) findViewById(R.id.textView16);
         labels[3][3]=(TextView) findViewById(R.id.textView17);
 
-        //====================================================
+
 
         //start a new game
         newGame();
@@ -115,22 +115,25 @@ public class FifteenPuzzle extends AppCompatActivity {
             }
         });
 
-        for (int i = 0; i < labels.length; i++) //same listener for all number buttons. after each move it will print the board again
+        //same listener for all number buttons. after each move it will print the board again
+        for (int i = 0; i < labels.length; i++)
         {
             for (int j = 0; j < labels.length; j++) {
                 labels[i][j].setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                     {
                         for (int k = 0; k < labels.length; k++) {
-                            for (int m = 0; m < labels.length; m++) {
-                                if (labels[k][m].getId() == v.getId())//find the spot to move
+                            for (int l = 0; l < labels.length; l++) {
+                                //find the spot to move
+                                if (labels[k][l].getId() == v.getId())
                                 {
-                                    if(game.isMoveable(k,m))//for the counter of moves
+                                    //for the move counter
+                                    if(game.isMoveable(k,l))
                                     {
                                         moveCounter++;
                                         moves.setText("Moves Made: " + moveCounter);
                                     }
-                                    game.move(k,m);
+                                    game.move(k,l);
                                 }
                             }
                             printBoard();
@@ -141,10 +144,12 @@ public class FifteenPuzzle extends AppCompatActivity {
                                 for (int i = 0; i < labels.length; i++) {
                                     for (int j = 0; j < labels.length; j++)
                                     {
-                                        labels[i][j].setClickable(false); //disable clicking on the numbers till new game starts
+                                        //disable clicking on the numbers till new game starts
+                                        labels[i][j].setClickable(false);
                                     }
                                 }
-                                Toast.makeText(FifteenPuzzle.this,"You won the the game!", Toast.LENGTH_LONG).show(); //victory message
+                                //Message for when user wins game
+                                Toast.makeText(FifteenPuzzle.this,"You won the the game!", Toast.LENGTH_LONG).show();
 
                             }
                         }
